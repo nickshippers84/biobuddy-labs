@@ -1,0 +1,855 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioBuddy Labs - Cellular Respiration Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Work Sans', sans-serif;
+            line-height: 1.6;
+            color: #000000;
+            background: #f5f5f5;
+        }
+        
+        .lab-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+            font-style: italic;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .section {
+            margin-bottom: 50px;
+            page-break-inside: avoid;
+        }
+        
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            color: #000000;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #000000;
+        }
+        
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            background: #000000;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.4em;
+            position: relative;
+        }
+        
+        .section-icon::before {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background: currentColor;
+            mask-size: contain;
+            mask-repeat: no-repeat;
+            mask-position: center;
+        }
+        
+        .observation-icon::before {
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z'/%3E%3C/svg%3E");
+        }
+        
+        .background-icon::before {
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 11H7v6h2v-6zm4 0h-2v6h2v-6zm4 0h-2v6h2v-6zm2-7H3v2h16V4zm0 4H3v2h16V8z'/%3E%3C/svg%3E");
+        }
+        
+        .question-icon::before {
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M11 18h2v-2h-2v2zm1-16C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 15h2v-2h-2v2zm0-4h2V7h-2v6z'/%3E%3C/svg%3E");
+        }
+        
+        .hypothesis-icon::before {
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6C7.8 12.16 7 10.63 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z'/%3E%3C/svg%3E");
+        }
+        
+        .materials-icon::before {
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z'/%3E%3C/svg%3E");
+        }
+        
+        .protocol-icon::before {
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z'/%3E%3C/svg%3E");
+        }
+        
+        .data-icon::before {
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z'/%3E%3C/svg%3E");
+        }
+        
+        .discussion-icon::before {
+            mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h4l4 4 4-4h4c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z'/%3E%3C/svg%3E");
+        }
+        
+        .section-content {
+            font-size: 1.05em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .chat-bubble {
+            background: #e0e0e0;
+            border-radius: 20px;
+            padding: 20px;
+            margin: 25px 0;
+            position: relative;
+            max-width: 80%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .chat-bubble::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 30px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 10px solid #e0e0e0;
+        }
+        
+        .profile-section {
+            display: flex;
+            align-items: flex-end;
+            gap: 20px;
+            margin: 25px 0;
+        }
+        
+        .profile-photo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #666666, #999999);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5em;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .profile-info {
+            text-align: center;
+            margin-top: 10px;
+        }
+        
+        .profile-name {
+            font-weight: 600;
+            color: #000000;
+            font-size: 0.9em;
+        }
+        
+        .equation-box {
+            background: #f0f0f0;
+            border-left: 4px solid #000000;
+            padding: 25px;
+            margin: 25px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.2em;
+            text-align: center;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .hypothesis-box {
+            background: #f9f9f9;
+            border: 2px dashed #000000;
+            padding: 30px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+        
+        .hypothesis-box h3 {
+            color: #000000;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .hypothesis-input {
+            width: 100%;
+            min-height: 240px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 1em;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+        
+        .hypothesis-input:focus {
+            outline: none;
+            border-color: #000000;
+        }
+        
+        .materials-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+            border-radius: 12px;
+            margin: 25px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #000000;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .materials-image::before {
+            content: "🧪 ⚗️ 🔬";
+            font-size: 3em;
+            opacity: 0.3;
+        }
+        
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .material-item {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.95em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border: 1px solid #000000;
+        }
+        
+        .material-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #000000;
+            border-radius: 4px;
+            flex-shrink: 0;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .material-checkbox.checked {
+            background: #000000;
+        }
+        
+        .material-checkbox.checked::after {
+            content: "✓";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .protocol-list {
+            counter-reset: step-counter;
+            list-style: none;
+            margin: 25px 0;
+        }
+        
+        .protocol-list li {
+            counter-increment: step-counter;
+            margin-bottom: 25px;
+            padding-left: 60px;
+            position: relative;
+            line-height: 1.7;
+        }
+        
+        .protocol-list li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #000000;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        
+        .note-box {
+            background: #f0f0f0;
+            border-left: 4px solid #000000;
+            padding: 20px;
+            margin: 20px 0 20px 60px;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .note-box strong {
+            color: #000000;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .data-table th {
+            font-family: 'Montserrat', sans-serif;
+            background: #000000;
+            color: white;
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .data-table td {
+            padding: 20px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .data-table tr:nth-child(even) {
+            background: #f0f0f0;
+        }
+        
+        .data-table input {
+            width: 100%;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 12px;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+        
+        .data-table input:focus {
+            outline: none;
+            border-color: #000000;
+        }
+        
+        .discussion-questions {
+            list-style: none;
+            counter-reset: question-counter;
+        }
+        
+        .discussion-questions li {
+            counter-increment: question-counter;
+            margin-bottom: 30px;
+            padding-left: 50px;
+            position: relative;
+            font-size: 1.05em;
+            line-height: 1.7;
+        }
+        
+        .discussion-questions li::before {
+            content: counter(question-counter) ".";
+            position: absolute;
+            left: 0;
+            color: #000000;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        
+        .question-input {
+            width: 100%;
+            min-height: 160px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 1em;
+            resize: vertical;
+            margin-top: 10px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .question-input:focus {
+            outline: none;
+            border-color: #000000;
+        }
+        
+        .sub-questions {
+            margin-top: 15px;
+            padding-left: 30px;
+            list-style: none;
+        }
+        
+        .sub-questions li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .sub-questions li::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            background: #000000;
+            border-radius: 50%;
+        }
+        
+        .subsection-title {
+            font-family: 'Montserrat', sans-serif;
+            color: #000000;
+            margin: 25px 0 15px 0;
+            font-size: 1.3em;
+            font-weight: 600;
+        }
+        
+        .completion-message {
+            background: linear-gradient(135deg, #000000, #333333);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .completion-message h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        
+        .research-question {
+            font-size: 1.3em;
+            font-weight: 600;
+            color: #000000;
+            text-align: center;
+            padding: 20px;
+            background: #f0f0f0;
+            border-radius: 8px;
+            border: 2px solid #000000;
+        }
+        
+        @media (max-width: 768px) {
+            .lab-container {
+                margin: 10px;
+                border-radius: 0;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 30px 20px;
+            }
+            
+            .materials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .protocol-list li {
+                padding-left: 50px;
+            }
+            
+            .protocol-list li::before {
+                width: 35px;
+                height: 35px;
+            }
+        }
+        
+        @media print {
+            .lab-container {
+                box-shadow: none;
+                margin: 0;
+                border-radius: 0;
+            }
+            
+            .header {
+                background: #000000 !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            
+            .section {
+                page-break-inside: avoid;
+                margin-bottom: 30px;
+            }
+            
+            .section-title {
+                page-break-after: avoid;
+            }
+            
+            .data-table {
+                page-break-inside: avoid;
+            }
+            
+            .hypothesis-input, .question-input, .data-table input {
+                border: 1px solid #000000;
+                background: white;
+            }
+            
+            .chat-bubble {
+                background: #f0f0f0 !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            
+            .materials-image {
+                border: 2px solid #000000 !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="lab-container">
+        <div class="header">
+            <h1>Unit 6: Cellular Respiration</h1>
+            <p class="subtitle">(The Lab Formerly Known as Cereal-ular Respiration)</p>
+        </div>
+        
+        <div class="content">
+            <!-- Observation Section -->
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="section-icon observation-icon"></div>
+                    Observation
+                </h2>
+                <div class="profile-section">
+                    <div>
+                        <div class="chat-bubble">
+                            <p>I was training for a marathon last year! What a crazy idea. Anyway, as I trained, I learned that a really important aspect of training for a marathon is learning how to eat while you are running and figuring out the right foods to fuel you for multiple hours of running. The foods I ate ranged from ramen noodles to peanut butter and jelly to candy to energy gels.</p>
+                            
+                            <p style="margin-top: 15px;">I was baffled by the bursts of energy that I would get after eating a handful of gummi bears vs. the slightly slower release of energy that a peanut butter and jelly sandwich would give me. Of course, this got me thinking about how our bodies metabolize food to create energy.</p>
+                            
+                            <p style="margin-top: 15px;">I went searching around in my brain library, and I found something about how cellular respiration is one way that our body produces energy from the sugars that we consume. Then I began to wonder how the foods I eat during running affect me. How could they change the rate of cellular respiration and therefore my rate of energy production?</p>
+                        </div>
+                    </div>
+                    <div class="profile-info">
+                        <div class="profile-photo">DN</div>
+                        <div class="profile-name">Dr. Nystrom</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Background Section -->
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="section-icon background-icon"></div>
+                    Background
+                </h2>
+                <div class="section-content">
+                    <p>Cellular respiration is the process by which cells break down glucose to create energy in the form of ATP (adenosine triphosphate). The equation for cellular respiration is as follows:</p>
+                    
+                    <div class="equation-box">
+                        Glucose + Water → Carbon Dioxide + Water + ATP
+                    </div>
+                    
+                    <p>One can change the rate of cellular respiration by changing the amount of available glucose to be used in the reaction.</p>
+                </div>
+            </div>
+            
+            <!-- Question Section -->
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="section-icon question-icon"></div>
+                    Research Question
+                </h2>
+                <div class="section-content">
+                    <div class="research-question">
+                        How do foods with different sugar content affect the rate of cellular respiration?
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hypothesis Section -->
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="section-icon hypothesis-icon"></div>
+                    Hypothesis
+                </h2>
+                <div class="hypothesis-box">
+                    <h3>Write your hypothesis below:</h3>
+                    <textarea class="hypothesis-input" id="hypothesisInput" placeholder="Enter your hypothesis about how different sugar contents will affect the rate of cellular respiration..."></textarea>
+                </div>
+            </div>
+            
+            <!-- Materials Section -->
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="section-icon materials-icon"></div>
+                    Materials and Methods
+                </h2>
+                
+                <h3 class="subsection-title">Experimental Design Note</h3>
+                <div class="section-content">
+                    <p>Although we don't have the tools at home to measure the amount of ATP produced, we can measure the rate of reaction by measuring another product of the cellular respiration reaction → carbon dioxide. In this experiment, we will capture carbon dioxide by using balloons.</p>
+                </div>
+                
+                <div class="materials-image"></div>
+                
+                <h3 class="subsection-title">Materials</h3>
+                <div class="materials-grid">
+                    <div class="material-item">
+                        <div class="material-checkbox" onclick="toggleCheckbox(this)"></div>
+                        Warm Water
+                    </div>
+                    <div class="material-item">
+                        <div class="material-checkbox" onclick="toggleCheckbox(this)"></div>
+                        Active Dry Yeast
+                    </div>
+                    <div class="material-item">
+                        <div class="material-checkbox" onclick="toggleCheckbox(this)"></div>
+                        3 types of cereal with different sugar contents
+                    </div>
+                    <div class="material-item">
+                        <div class="material-checkbox" onclick="toggleCheckbox(this)"></div>
+                        Funnel (can be made from a piece of paper)
+                    </div>
+                    <div class="material-item">
+                        <div class="material-checkbox" onclick="toggleCheckbox(this)"></div>
+                        3 Balloons
+                    </div>
+                    <div class="material-item">
+                        <div class="material-checkbox" onclick="toggleCheckbox(this)"></div>
+                        3 plastic soda bottles
+                    </div>
+                    <div class="material-item">
+                        <div class="material-checkbox" onclick="toggleCheckbox(this)"></div>
+                        3 plastic bags
+                    </div>
+                    <div class="material-item">
+                        <div class="material-checkbox" onclick="toggleCheckbox(this)"></div>
+                        Timer
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Protocol Section -->
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="section-icon protocol-icon"></div>
+                    Protocol
+                </h2>
+                <ol class="protocol-list">
+                    <li>Record the sugar content of each cereal in the data table below</li>
+                    <li>Choose a bottle for each cereal, and label them accordingly</li>
+                    <li>In separate plastic bags - Mash up each cereal into a coarse dust
+                        <div class="note-box">
+                            <strong>Note:</strong> This step is to make it easier for us to put the cereal into the bottles. It doesn't matter how fine the cereal dust is, as long as all 3 cereals are mushed up to the same consistency
+                        </div>
+                    </li>
+                    <li>In each bottle place the following things. Use funnel to make sure:
+                        <ul style="margin-top: 10px; margin-left: 25px;">
+                            <li style="margin-bottom: 8px;">2 tsp yeast</li>
+                            <li>¼ cup respective cereal</li>
+                        </ul>
+                    </li>
+                    <li>As quickly as possible, add ½ cup warm water to each bottle, and cover with a balloon</li>
+                    <li>Record which balloon stands up 1st, 2nd, and 3rd</li>
+                </ol>
+            </div>
+            
+            <!-- Data Section -->
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="section-icon data-icon"></div>
+                    Data
+                </h2>
+                <div class="section-content">
+                    <p style="margin-bottom: 20px;">Record results in the data table below.</p>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Order of Balloon Stand-Up</th>
+                                <th>Cereal</th>
+                                <th>Sugar Content</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>1st</strong></td>
+                                <td><input type="text" id="cereal1" placeholder="Enter cereal name"></td>
+                                <td><input type="text" id="sugar1" placeholder="Enter sugar content"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>2nd</strong></td>
+                                <td><input type="text" id="cereal2" placeholder="Enter cereal name"></td>
+                                <td><input type="text" id="sugar2" placeholder="Enter sugar content"></td>
+                            </tr>
+                            <tr>
+                                <td><strong>3rd</strong></td>
+                                <td><input type="text" id="cereal3" placeholder="Enter cereal name"></td>
+                                <td><input type="text" id="sugar3" placeholder="Enter sugar content"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Discussion Section -->
+            <div class="section">
+                <h2 class="section-title">
+                    <div class="section-icon discussion-icon"></div>
+                    Discussion
+                </h2>
+                <ol class="discussion-questions">
+                    <li>
+                        How do foods with different sugar content affect the rate of cellular respiration?
+                        <textarea class="question-input" placeholder="Enter your answer..."></textarea>
+                    </li>
+                    <li>
+                        Did your results support your hypothesis?
+                        <textarea class="question-input" placeholder="Enter your answer..."></textarea>
+                    </li>
+                    <li>
+                        What are the limitations of this experiment?
+                        <textarea class="question-input" placeholder="Enter your answer..."></textarea>
+                    </li>
+                    <li>
+                        What else do you think could affect the rate of cellular respiration?
+                        <textarea class="question-input" placeholder="Enter your answer..."></textarea>
+                    </li>
+                    <li>
+                        How do you think artificial sweeteners would affect the rate of cellular respiration?
+                        <textarea class="question-input" placeholder="Enter your answer..."></textarea>
+                        <ul class="sub-questions">
+                            <li>What experiments could you do to answer the above question?</li>
+                        </ul>
+                        <textarea class="question-input" placeholder="Enter your answer..."></textarea>
+                    </li>
+                    <li>
+                        What are some other questions that you could ask using a similar experimental set up?
+                        <textarea class="question-input" placeholder="Enter your answer..."></textarea>
+                    </li>
+                    <li>
+                        Any other thoughts or observations?
+                        <textarea class="question-input" placeholder="Enter your answer..."></textarea>
+                    </li>
+                </ol>
+                
+                <div class="completion-message">
+                    <h3>Congratulations!</h3>
+                    <p>You've completed the Cellular Respiration Lab! Great job working through this experiment and analyzing your results.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle checkbox functionality
+        function toggleCheckbox(checkbox) {
+            checkbox.classList.toggle('checked');
+            autoSave();
+        }
+        
+        // Auto-save functionality
+        function autoSave() {
+            const data = {
+                hypothesis: document.getElementById('hypothesisInput').value,
+                cereal1: document.getElementById('cereal1').value,
+                cereal2: document.getElementById('cereal2').value,
+                cereal3: document.getElementById('cereal3').value,
+                sugar1: document.getElementById('sugar1').value,
+                sugar2: document.getElementById('sugar2').value,
+                sugar3: document.getElementById('sugar3').value,
+                discussionAnswers: Array.from(document.querySelectorAll('.question-input')).map(input => input.value),
+                checkedMaterials: Array.from(document.querySelectorAll('.material-checkbox.checked')).map(cb => cb.parentElement.textContent.trim())
+            };
+            localStorage.setItem('cellularRespirationLab', JSON.stringify(data));
+        }
+        
+        // Load saved data
+        function loadSavedData() {
+            const saved = localStorage.getItem('cellularRespirationLab');
+            if (saved) {
+                const data = JSON.parse(saved);
+                if (data.hypothesis) document.getElementById('hypothesisInput').value = data.hypothesis;
+                if (data.cereal1) document.getElementById('cereal1').value = data.cereal1;
+                if (data.cereal2) document.getElementById('cereal2').value = data.cereal2;
+                if (data.cereal3) document.getElementById('cereal3').value = data.cereal3;
+                if (data.sugar1) document.getElementById('sugar1').value = data.sugar1;
+                if (data.sugar2) document.getElementById('sugar2').value = data.sugar2;
+                if (data.sugar3) document.getElementById('sugar3').value = data.sugar3;
+                if (data.discussionAnswers) {
+                    const inputs = document.querySelectorAll('.question-input');
+                    data.discussionAnswers.forEach((answer, index) => {
+                        if (inputs[index]) inputs[index].value = answer;
+                    });
+                }
+                if (data.checkedMaterials) {
+                    document.querySelectorAll('.material-item').forEach(item => {
+                        const text = item.textContent.trim();
+                        if (data.checkedMaterials.includes(text)) {
+                            const checkbox = item.querySelector('.material-checkbox');
+                            if (checkbox) checkbox.classList.add('checked');
+                        }
+                    });
+                }
+            }
+        }
+        
+        // Add event listeners for auto-save
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSavedData();
+            
+            // Auto-save on input changes
+            document.querySelectorAll('input, textarea').forEach(input => {
+                input.addEventListener('input', autoSave);
+            });
+        });
+    </script>
+</body>
+</html>
