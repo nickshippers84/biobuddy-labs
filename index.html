@@ -61,21 +61,35 @@
         
         .section-title {
             font-family: 'Montserrat', sans-serif;
-            color: #000000;
+            color: white;
             font-size: 1.8em;
             margin-bottom: 20px;
             font-weight: 700;
             display: flex;
             align-items: center;
             gap: 15px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #000000;
+            padding: 20px 25px;
+            background: linear-gradient(135deg, #000000 0%, #333333 100%);
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-title::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #f09712, #2e8b57, #f09712);
         }
         
         .section-icon {
             width: 50px;
             height: 50px;
-            background: #000000;
+            background: linear-gradient(135deg, #f09712, #2e8b57);
             border-radius: 8px;
             display: flex;
             align-items: center;
@@ -83,6 +97,7 @@
             color: white;
             font-size: 1.4em;
             position: relative;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
         
         .section-icon::before {
@@ -591,6 +606,18 @@
             
             .header {
                 background: #000000 !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            
+            .section-title {
+                background: #000000 !important;
+                -webkit-print-color-adjust: exact;
+                color-adjust: exact;
+            }
+            
+            .section-title::before {
+                background: #f09712 !important;
                 -webkit-print-color-adjust: exact;
                 color-adjust: exact;
             }
