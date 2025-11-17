@@ -535,6 +535,86 @@
             border: 2px solid #000000;
         }
         
+        .instruction-alert {
+            background: #ffffff;
+            border: 3px solid #000000;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            color: #000000;
+        }
+        
+        .instruction-alert p {
+            margin: 0;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+        
+        .instruction-alert a {
+            color: #000000;
+            text-decoration: underline;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .instruction-alert a:hover {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .instruction-alert button {
+            background: #000000;
+            color: #ffffff;
+            border: 2px solid #000000;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        
+        .instruction-alert button:hover {
+            background: #ffffff;
+            color: #000000;
+        }
+        
+        .student-name-section {
+            background: #ffffff;
+            border: 2px solid #000000;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .student-name-section label {
+            display: block;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .student-name-section input {
+            width: 100%;
+            border: 2px solid #000000;
+            border-radius: 6px;
+            padding: 12px;
+            font-family: 'Work Sans', sans-serif;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+        
+        .student-name-section input:focus {
+            outline: none;
+            border-color: #000000;
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+        }
+        
         @media (max-width: 768px) {
             .lab-container {
                 margin: 10px;
@@ -603,6 +683,10 @@
                 border-radius: 0;
             }
             
+            .instruction-alert {
+                display: none;
+            }
+            
             .header {
                 background: #000000 !important;
                 -webkit-print-color-adjust: exact;
@@ -655,6 +739,18 @@
         </div>
         
         <div class="content">
+            <!-- Instruction Alert Box -->
+            <div class="instruction-alert">
+                <p>Instructions: Keep this open in your browser window and type what you need, you can print when you're ready or <a href="#" onclick="exportAsPDF(); return false;">click here to export as a pdf</a>.</p>
+                <button onclick="exportAsPDF()">Print as PDF</button>
+            </div>
+            
+            <!-- Student Name Section -->
+            <div class="student-name-section">
+                <label for="studentName">Student Name:</label>
+                <input type="text" id="studentName" placeholder="Enter your name" />
+            </div>
+            
             <!-- Observation Section -->
             <div class="section">
                 <h2 class="section-title">
@@ -689,7 +785,7 @@
                     <p>Cellular respiration is the process by which cells break down glucose to create energy in the form of ATP (adenosine triphosphate). The equation for cellular respiration is as follows:</p>
                     
                     <div class="equation-box">
-                        Glucose + Water → Carbon Dioxide + Water + ATP
+                        Glucose + Oxygen → Carbon Dioxide + Water + ATP
                     </div>
                     
                     <p>One can change the rate of cellular respiration by changing the amount of available glucose to be used in the reaction.</p>
@@ -736,42 +832,42 @@
                 <h3 class="subsection-title">Materials</h3>
                 <div class="materials-grid">
                     <div class="material-item">
-                        <div class="material-image-block" style="background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDJMMjAgMkwyMCAyQzE1IDIgMTEgNiAxMSAxMUMxMSAxNiAxNSAyMCAyMCAyMEMyNSAyMCAyOSAxNiAyOSAxMUMzMCA2IDI2IDIgMjAgMloiIGZpbGw9IiMwMDAwMDAiLz4KPHBhdGggZD0iTTIwIDI0QzE2IDI0IDEzIDIxIDEzIDE3QzEzIDEzIDE2IDEwIDIwIDEwQzI0IDEwIDI3IDEzIDI3IDE3QzI3IDIxIDI0IDI0IDIwIDI0WiIgZmlsbD0iIzAwMDAwMCIvPgo8L3N2Zz4K'); background-size: 40px 40px; background-repeat: no-repeat; background-position: center;"></div>
+                        <div class="material-image-block" style="background-image: url('img/water-cup.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
                         <div class="material-checkbox" onclick="toggleCheckbox(this)"></div>
                         Warm Water
                     </div>
                     <div class="material-item">
-                        <div class="material-image-block"></div>
+                        <div class="material-image-block" style="background-image: url('img/active-dry-yeast.webp'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
                         <div class="material-checkbox" onclick="toggleCheckbox(this)"></div>
                         Active Dry Yeast
                     </div>
                     <div class="material-item">
-                        <div class="material-image-block"></div>
+                        <div class="material-image-block" style="background-image: url('img/cereal.avif'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
                         <div class="material-checkbox" onclick="toggleCheckbox(this)"></div>
                         3 types of cereal with different sugar contents
                     </div>
                     <div class="material-item">
-                        <div class="material-image-block"></div>
+                        <div class="material-image-block" style="background-image: url('img/funnel.png'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
                         <div class="material-checkbox" onclick="toggleCheckbox(this)"></div>
                         Funnel (can be made from a piece of paper)
                     </div>
                     <div class="material-item">
-                        <div class="material-image-block"></div>
+                        <div class="material-image-block" style="background-image: url('img/balloons.avif'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
                         <div class="material-checkbox" onclick="toggleCheckbox(this)"></div>
                         3 Balloons
                     </div>
                     <div class="material-item">
-                        <div class="material-image-block"></div>
+                        <div class="material-image-block" style="background-image: url('img/plastic-soda-bottle.avif'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
                         <div class="material-checkbox" onclick="toggleCheckbox(this)"></div>
                         3 plastic soda bottles
                     </div>
                     <div class="material-item">
-                        <div class="material-image-block"></div>
+                        <div class="material-image-block" style="background-image: url('img/plastic-bag.jpg'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
                         <div class="material-checkbox" onclick="toggleCheckbox(this)"></div>
                         3 plastic bags
                     </div>
                     <div class="material-item">
-                        <div class="material-image-block"></div>
+                        <div class="material-image-block" style="background-image: url('img/timer.avif'); background-size: cover; background-repeat: no-repeat; background-position: center;"></div>
                         <div class="material-checkbox" onclick="toggleCheckbox(this)"></div>
                         Timer
                     </div>
@@ -797,9 +893,8 @@
                             <li style="margin-bottom: 8px;">2 tsp yeast</li>
                             <li>¼ cup respective cereal</li>
                         </ul>
+                        As quickly as possible, add ½ cup warm water to each bottle, and cover with a balloon. Record which balloon stands up 1st, 2nd, and 3rd.
                     </li>
-                    <li>As quickly as possible, add ½ cup warm water to each bottle, and cover with a balloon</li>
-                    <li>Record which balloon stands up 1st, 2nd, and 3rd</li>
                 </ol>
             </div>
             
@@ -891,6 +986,11 @@
     </div>
 
     <script>
+        // PDF Export functionality
+        function exportAsPDF() {
+            window.print();
+        }
+        
         // Toggle checkbox functionality
         function toggleCheckbox(checkbox) {
             checkbox.classList.toggle('checked');
@@ -900,6 +1000,7 @@
         // Auto-save functionality
         function autoSave() {
             const data = {
+                studentName: document.getElementById('studentName').value,
                 hypothesis: document.getElementById('hypothesisInput').value,
                 cereal1: document.getElementById('cereal1').value,
                 cereal2: document.getElementById('cereal2').value,
@@ -918,6 +1019,7 @@
             const saved = localStorage.getItem('cellularRespirationLab');
             if (saved) {
                 const data = JSON.parse(saved);
+                if (data.studentName) document.getElementById('studentName').value = data.studentName;
                 if (data.hypothesis) document.getElementById('hypothesisInput').value = data.hypothesis;
                 if (data.cereal1) document.getElementById('cereal1').value = data.cereal1;
                 if (data.cereal2) document.getElementById('cereal2').value = data.cereal2;
