@@ -288,6 +288,7 @@
             border: 2px solid #000000;
             position: relative;
             overflow: hidden;
+            filter: grayscale(100%);
         }
         
         .material-image-block::before {
@@ -739,16 +740,16 @@
         </div>
         
         <div class="content">
+            <!-- Student Name Section -->
+            <div class="student-name-section">
+                <label for="studentName">Student Name:</label>
+                <input type="text" id="studentName" data-key="student-name" placeholder="Enter your name" />
+            </div>
+            
             <!-- Instruction Alert Box -->
             <div class="instruction-alert">
                 <p>Instructions: Keep this open in your browser window and type what you need, you can print when you're ready or <a href="#" onclick="exportAsPDF(); return false;">click here to export as a pdf</a>.</p>
                 <button onclick="exportAsPDF()">Print as PDF</button>
-            </div>
-            
-            <!-- Student Name Section -->
-            <div class="student-name-section">
-                <label for="studentName">Student Name:</label>
-                <input type="text" id="studentName" placeholder="Enter your name" />
             </div>
             
             <!-- Observation Section -->
@@ -813,7 +814,7 @@
                 </h2>
                 <div class="hypothesis-box">
                     <h3>Write your hypothesis below:</h3>
-                    <textarea class="hypothesis-input" id="hypothesisInput" placeholder="Enter your hypothesis about how different sugar contents will affect the rate of cellular respiration..."></textarea>
+                    <textarea class="hypothesis-input" id="hypothesisInput" data-key="hypothesis" placeholder="Enter your hypothesis about how different sugar contents will affect the rate of cellular respiration..."></textarea>
                 </div>
             </div>
             
@@ -889,12 +890,13 @@
                         </div>
                     </li>
                     <li>In each bottle place the following things. Use funnel to make sure:
-                        <ul style="margin-top: 10px; margin-left: 25px;">
+                        <ul style="margin-top: 10px; margin-left: 25px; list-style-type: disc;">
                             <li style="margin-bottom: 8px;">2 tsp yeast</li>
                             <li>¼ cup respective cereal</li>
                         </ul>
-                        As quickly as possible, add ½ cup warm water to each bottle, and cover with a balloon. Record which balloon stands up 1st, 2nd, and 3rd.
+                        As quickly as possible, add ½ cup warm water to each bottle, and cover with a balloon.
                     </li>
+                    <li>Record which balloon stands up 1st, 2nd, and 3rd.</li>
                 </ol>
             </div>
             
@@ -917,18 +919,18 @@
                         <tbody>
                             <tr>
                                 <td><strong>1st</strong></td>
-                                <td><input type="text" id="cereal1" placeholder="Enter cereal name"></td>
-                                <td><input type="text" id="sugar1" placeholder="Enter sugar content"></td>
+                                <td><input type="text" id="cereal1" data-key="cereal-1" placeholder="Enter cereal name"></td>
+                                <td><input type="text" id="sugar1" data-key="sugar-1" placeholder="Enter sugar content"></td>
                             </tr>
                             <tr>
                                 <td><strong>2nd</strong></td>
-                                <td><input type="text" id="cereal2" placeholder="Enter cereal name"></td>
-                                <td><input type="text" id="sugar2" placeholder="Enter sugar content"></td>
+                                <td><input type="text" id="cereal2" data-key="cereal-2" placeholder="Enter cereal name"></td>
+                                <td><input type="text" id="sugar2" data-key="sugar-2" placeholder="Enter sugar content"></td>
                             </tr>
                             <tr>
                                 <td><strong>3rd</strong></td>
-                                <td><input type="text" id="cereal3" placeholder="Enter cereal name"></td>
-                                <td><input type="text" id="sugar3" placeholder="Enter sugar content"></td>
+                                <td><input type="text" id="cereal3" data-key="cereal-3" placeholder="Enter cereal name"></td>
+                                <td><input type="text" id="sugar3" data-key="sugar-3" placeholder="Enter sugar content"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -944,35 +946,35 @@
                 <ol class="discussion-questions">
                     <li>
                         How do foods with different sugar content affect the rate of cellular respiration?
-                        <textarea class="question-input" placeholder="Enter your answer..."></textarea>
+                        <textarea class="question-input" data-key="discussion-1" placeholder="Enter your answer..."></textarea>
                     </li>
                     <li>
                         Did your results support your hypothesis?
-                        <textarea class="question-input" placeholder="Enter your answer..."></textarea>
+                        <textarea class="question-input" data-key="discussion-2" placeholder="Enter your answer..."></textarea>
                     </li>
                     <li>
                         What are the limitations of this experiment?
-                        <textarea class="question-input" placeholder="Enter your answer..."></textarea>
+                        <textarea class="question-input" data-key="discussion-3" placeholder="Enter your answer..."></textarea>
                     </li>
                     <li>
                         What else do you think could affect the rate of cellular respiration?
-                        <textarea class="question-input" placeholder="Enter your answer..."></textarea>
+                        <textarea class="question-input" data-key="discussion-4" placeholder="Enter your answer..."></textarea>
                     </li>
                     <li>
                         How do you think artificial sweeteners would affect the rate of cellular respiration?
-                        <textarea class="question-input" placeholder="Enter your answer..."></textarea>
+                        <textarea class="question-input" data-key="discussion-5" placeholder="Enter your answer..."></textarea>
                         <ul class="sub-questions">
                             <li>What experiments could you do to answer the above question?</li>
                         </ul>
-                        <textarea class="question-input" placeholder="Enter your answer..."></textarea>
+                        <textarea class="question-input" data-key="discussion-5-sub" placeholder="Enter your answer..."></textarea>
                     </li>
                     <li>
                         What are some other questions that you could ask using a similar experimental set up?
-                        <textarea class="question-input" placeholder="Enter your answer..."></textarea>
+                        <textarea class="question-input" data-key="discussion-6" placeholder="Enter your answer..."></textarea>
                     </li>
                     <li>
                         Any other thoughts or observations?
-                        <textarea class="question-input" placeholder="Enter your answer..."></textarea>
+                        <textarea class="question-input" data-key="discussion-7" placeholder="Enter your answer..."></textarea>
                     </li>
                 </ol>
                 
@@ -994,53 +996,56 @@
         // Toggle checkbox functionality
         function toggleCheckbox(checkbox) {
             checkbox.classList.toggle('checked');
-            autoSave();
+            // Note: Checkboxes don't use data-key pattern, so we don't auto-save them here
         }
         
-        // Auto-save functionality
-        function autoSave() {
-            const data = {
-                studentName: document.getElementById('studentName').value,
-                hypothesis: document.getElementById('hypothesisInput').value,
-                cereal1: document.getElementById('cereal1').value,
-                cereal2: document.getElementById('cereal2').value,
-                cereal3: document.getElementById('cereal3').value,
-                sugar1: document.getElementById('sugar1').value,
-                sugar2: document.getElementById('sugar2').value,
-                sugar3: document.getElementById('sugar3').value,
-                discussionAnswers: Array.from(document.querySelectorAll('.question-input')).map(input => input.value),
-                checkedMaterials: Array.from(document.querySelectorAll('.material-checkbox.checked')).map(cb => cb.parentElement.textContent.trim())
-            };
-            localStorage.setItem('cellularRespirationLab', JSON.stringify(data));
+        // LAB-ID constant
+        const LAB_ID = 'cellular-respiration';
+        
+        // Get localStorage key for a specific data-key
+        function getStorageKey(dataKey) {
+            return `labResponses_${LAB_ID}_${dataKey}`;
         }
         
-        // Load saved data
+        // Auto-save functionality - saves individual fields using data-key pattern
+        function autoSave(event) {
+            const element = event ? event.target : null;
+            if (element && element.hasAttribute('data-key')) {
+                const dataKey = element.getAttribute('data-key');
+                const value = element.value;
+                const storageKey = getStorageKey(dataKey);
+                localStorage.setItem(storageKey, value);
+            }
+        }
+        
+        // Load saved data for all fields with data-key attributes
         function loadSavedData() {
-            const saved = localStorage.getItem('cellularRespirationLab');
-            if (saved) {
-                const data = JSON.parse(saved);
-                if (data.studentName) document.getElementById('studentName').value = data.studentName;
-                if (data.hypothesis) document.getElementById('hypothesisInput').value = data.hypothesis;
-                if (data.cereal1) document.getElementById('cereal1').value = data.cereal1;
-                if (data.cereal2) document.getElementById('cereal2').value = data.cereal2;
-                if (data.cereal3) document.getElementById('cereal3').value = data.cereal3;
-                if (data.sugar1) document.getElementById('sugar1').value = data.sugar1;
-                if (data.sugar2) document.getElementById('sugar2').value = data.sugar2;
-                if (data.sugar3) document.getElementById('sugar3').value = data.sugar3;
-                if (data.discussionAnswers) {
-                    const inputs = document.querySelectorAll('.question-input');
-                    data.discussionAnswers.forEach((answer, index) => {
-                        if (inputs[index]) inputs[index].value = answer;
-                    });
+            // Load all inputs and textareas with data-key attributes
+            document.querySelectorAll('input[data-key], textarea[data-key]').forEach(element => {
+                const dataKey = element.getAttribute('data-key');
+                const storageKey = getStorageKey(dataKey);
+                const saved = localStorage.getItem(storageKey);
+                if (saved !== null) {
+                    element.value = saved;
                 }
-                if (data.checkedMaterials) {
-                    document.querySelectorAll('.material-item').forEach(item => {
-                        const text = item.textContent.trim();
-                        if (data.checkedMaterials.includes(text)) {
-                            const checkbox = item.querySelector('.material-checkbox');
-                            if (checkbox) checkbox.classList.add('checked');
-                        }
-                    });
+            });
+            
+            // Load checked materials (using old format for backward compatibility)
+            const oldSaved = localStorage.getItem('cellularRespirationLab');
+            if (oldSaved) {
+                try {
+                    const data = JSON.parse(oldSaved);
+                    if (data.checkedMaterials) {
+                        document.querySelectorAll('.material-item').forEach(item => {
+                            const text = item.textContent.trim();
+                            if (data.checkedMaterials.includes(text)) {
+                                const checkbox = item.querySelector('.material-checkbox');
+                                if (checkbox) checkbox.classList.add('checked');
+                            }
+                        });
+                    }
+                } catch (e) {
+                    // Ignore parse errors
                 }
             }
         }
