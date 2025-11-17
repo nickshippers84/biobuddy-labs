@@ -383,6 +383,20 @@
             font-size: 1.1em;
         }
         
+        .protocol-list li ul {
+            counter-reset: none;
+        }
+        
+        .protocol-list li ul li {
+            counter-increment: none;
+            padding-left: 0;
+            margin-bottom: 8px;
+        }
+        
+        .protocol-list li ul li::before {
+            display: none;
+        }
+        
         .note-box {
             background: #f0f0f0;
             border-left: 4px solid #000000;
@@ -678,10 +692,18 @@
         }
         
         @media print {
+            @page {
+                margin-top: 0.75in;
+                margin-bottom: 0.5in;
+                margin-left: 0.5in;
+                margin-right: 0.5in;
+            }
+            
             .lab-container {
                 box-shadow: none;
                 margin: 0;
                 border-radius: 0;
+                padding: 0;
             }
             
             .instruction-alert {
@@ -691,26 +713,238 @@
             .header {
                 background: #000000 !important;
                 -webkit-print-color-adjust: exact;
-                color-adjust: exact;
+                print-color-adjust: exact;
+                padding: 15px 40px;
+                page-break-after: avoid;
+                margin-top: 0;
+            }
+            
+            .header h1 {
+                font-size: 1.8em;
+                margin-bottom: 5px;
+            }
+            
+            .header .subtitle {
+                font-size: 1em;
+            }
+            
+            .content {
+                padding: 15px 30px;
+                font-size: 0.9em;
+            }
+            
+            .student-name-section {
+                margin-bottom: 10px;
+                padding: 10px;
+                page-break-after: avoid;
+            }
+            
+            .student-name-section label {
+                font-size: 0.95em;
+            }
+            
+            .student-name-section input {
+                padding: 8px;
+                font-size: 0.9em;
             }
             
             .section-title {
+                font-family: 'Montserrat', sans-serif !important;
                 color: #000000 !important;
                 -webkit-print-color-adjust: exact;
-                color-adjust: exact;
+                print-color-adjust: exact;
+                margin-bottom: 8px;
+                padding-bottom: 5px;
+                font-size: 1.4em;
+                page-break-after: avoid;
+            }
+            
+            .subsection-title {
+                font-family: 'Montserrat', sans-serif !important;
+            }
+            
+            .section-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 1.1em;
             }
             
             .section {
-                page-break-inside: avoid;
-                margin-bottom: 30px;
+                margin-bottom: 12px;
             }
             
-            .section-title {
+            /* Allow sections to break if needed, except for specific ones */
+            .section:not(:has(.profile-section)):not(:has(.hypothesis-box)):not(:has(.data-table)) {
+                page-break-inside: auto;
+            }
+            
+            /* Keep Background section with Observation on page 1 */
+            .section:has(.background-icon) {
                 page-break-after: avoid;
+            }
+            
+            /* Keep Hypothesis with Research Question on page 2 */
+            .section:has(.hypothesis-box) {
+                page-break-after: avoid;
+            }
+            
+            /* Page break strategy:
+             * Page 1: Student name, Observation, Background
+             * Page 2: Research Question, Hypothesis
+             * Page 3: Materials and Methods
+             * Page 4: Protocol
+             * Page 5: Data
+             * Page 6: Discussion (and rest)
+             */
+            
+            /* Page 2: Research Question starts on new page */
+            .section:has(.research-question) {
+                page-break-before: always;
+            }
+            
+            /* Page 3: Materials section starts on new page */
+            .section:has(.materials-grid) {
+                page-break-before: always;
+            }
+            
+            /* Page 4: Protocol section starts on new page */
+            .section:has(.protocol-list) {
+                page-break-before: always;
+            }
+            
+            /* Page 5: Data section starts on new page */
+            .section:has(.data-table) {
+                page-break-before: always;
+            }
+            
+            /* Page 6: Discussion section starts on new page */
+            .section:has(.discussion-questions) {
+                page-break-before: always;
+            }
+            
+            .profile-section {
+                page-break-inside: avoid;
+                margin: 8px 0;
+                padding: 8px;
+                border-radius: 8px;
+            }
+            
+            .profile-content {
+                display: flex !important;
+                flex-direction: row !important;
+                align-items: flex-start !important;
+                gap: 10px !important;
+            }
+            
+            .profile-info {
+                min-width: 80px;
+                flex-shrink: 0;
+            }
+            
+            .profile-photo {
+                width: 50px;
+                height: 50px;
+                border-width: 2px;
+            }
+            
+            .profile-name {
+                font-size: 0.9em;
+                margin-top: 8px;
+            }
+            
+            .profile-title {
+                font-size: 0.75em;
+                margin-top: 3px;
+            }
+            
+            .chat-bubble {
+                padding: 10px;
+                font-size: 0.9em;
+                line-height: 1.4;
+                flex: 1;
+            }
+            
+            .chat-bubble p {
+                margin-bottom: 6px;
+                font-size: 0.85em;
+            }
+            
+            .chat-bubble::before,
+            .chat-bubble::after {
+                display: none; /* Hide arrow in print */
+            }
+            
+            .section-content {
+                margin-bottom: 8px;
+                font-size: 0.9em;
+            }
+            
+            .section-content p {
+                margin-bottom: 6px;
+            }
+            
+            .equation-box {
+                margin: 10px 0;
+                padding: 15px;
+            }
+            
+            .research-question {
+                margin: 10px 0;
+                padding: 15px;
+            }
+            
+            .hypothesis-box {
+                page-break-inside: avoid;
+                margin: 10px 0;
+                padding: 15px;
+            }
+            
+            .materials-grid {
+                display: grid !important;
+                grid-template-columns: repeat(4, 1fr) !important;
+                gap: 8px !important;
+                margin: 8px 0;
+            }
+            
+            .material-item {
+                padding: 8px;
+                margin-bottom: 0;
+                font-size: 0.8em;
+            }
+            
+            .material-image-block {
+                height: 60px;
+                margin-bottom: 4px;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                background-size: cover !important;
+                background-repeat: no-repeat !important;
+                background-position: center !important;
+            }
+            
+            /* Ensure all elements with background images print */
+            [style*="background-image"] {
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
             }
             
             .data-table {
                 page-break-inside: avoid;
+                margin: 10px 0;
+            }
+            
+            .protocol-list {
+                page-break-inside: avoid;
+                margin: 10px 0;
+            }
+            
+            .protocol-list li {
+                margin-bottom: 15px;
+            }
+            
+            .discussion-questions li {
+                page-break-inside: avoid;
+                margin-bottom: 15px;
             }
             
             .hypothesis-input, .question-input, .data-table input {
@@ -721,13 +955,13 @@
             .chat-bubble {
                 background: #f0f0f0 !important;
                 -webkit-print-color-adjust: exact;
-                color-adjust: exact;
+                print-color-adjust: exact;
             }
             
             .materials-image {
                 border: 2px solid #000000 !important;
                 -webkit-print-color-adjust: exact;
-                color-adjust: exact;
+                print-color-adjust: exact;
             }
         }
     </style>
@@ -894,8 +1128,8 @@
                             <li style="margin-bottom: 8px;">2 tsp yeast</li>
                             <li>¼ cup respective cereal</li>
                         </ul>
-                        As quickly as possible, add ½ cup warm water to each bottle, and cover with a balloon.
                     </li>
+                    <li>As quickly as possible, add ½ cup warm water to each bottle, and cover with a balloon.</li>
                     <li>Record which balloon stands up 1st, 2nd, and 3rd.</li>
                 </ol>
             </div>
@@ -977,12 +1211,6 @@
                         <textarea class="question-input" data-key="discussion-7" placeholder="Enter your answer..."></textarea>
                     </li>
                 </ol>
-                
-                <div class="completion-message">
-                    <h3>Congratulations!</h3>
-                    <p>You've completed the Cellular Respiration Lab!</p>
-                    <p>Great job working through this experiment and analyzing your results.</p>
-                </div>
             </div>
         </div>
     </div>
