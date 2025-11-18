@@ -820,6 +820,23 @@
             /* Page 6: Discussion section starts on new page */
             .section:has(.discussion-questions) {
                 page-break-before: always;
+                page-break-after: avoid;
+                margin-bottom: 0;
+            }
+            
+            /* Prevent blank page at end */
+            .lab-container {
+                page-break-after: avoid;
+            }
+            
+            .content {
+                page-break-after: avoid;
+            }
+            
+            /* Remove extra margin from last section */
+            .section:last-child {
+                margin-bottom: 0;
+                padding-bottom: 0;
             }
             
             .profile-section {
@@ -945,6 +962,14 @@
             .discussion-questions li {
                 page-break-inside: avoid;
                 margin-bottom: 15px;
+            }
+            
+            .discussion-questions li:last-child {
+                margin-bottom: 0;
+            }
+            
+            .discussion-questions {
+                margin-bottom: 0;
             }
             
             .hypothesis-input, .question-input, .data-table input {
