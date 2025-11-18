@@ -35,6 +35,15 @@
             color: white;
             padding: 40px;
             text-align: center;
+            position: relative;
+        }
+        
+        .header-logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            height: 60px;
+            width: auto;
         }
         
         .header h1 {
@@ -719,6 +728,14 @@
                 margin-top: 0;
             }
             
+            .header-logo {
+                height: 40px;
+                top: 10px;
+                right: 15px;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
             .header h1 {
                 font-size: 1.8em;
                 margin-bottom: 5px;
@@ -994,6 +1011,7 @@
 <body>
     <div class="lab-container">
         <div class="header">
+            <img src="img/biobuddy-logo-1x1.png" alt="BioBuddy Logo" class="header-logo">
             <h1>Unit 3: Cellular Respiration</h1>
             <p class="subtitle">(The Lab Formerly Known as Cereal-ular Respiration)</p>
         </div>
@@ -1007,8 +1025,8 @@
             
             <!-- Instruction Alert Box -->
             <div class="instruction-alert">
-                <p>Instructions: Keep this open in your browser window and type what you need, you can print when you're ready.</p>
-                <button onclick="exportAsPDF()">Print as PDF</button>
+                <p><strong>Instructions:</strong> Keep this open in your browser window and type what you need, you can print when you're ready. You can find more labs and get your biology A game at <a href="https://learn.biobuddy.com" target="_blank">learn.biobuddy.com</a>.</p>
+                <button onclick="exportAsPDF()">Save as PDF</button>
             </div>
             
             <!-- Observation Section -->
